@@ -12,6 +12,10 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_products_on_title  (title) UNIQUE
+#
 
 class Product < ApplicationRecord
   validates :title, :price, presence: true
