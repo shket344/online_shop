@@ -1,0 +1,10 @@
+h1 All Products
+
+table
+  - @products.each do |product|
+    tr
+      td
+        = link_to "#{product.title}", product_path(product)
+
+br
+= link_to 'Create Product', new_product_path
