@@ -14,8 +14,9 @@ jobs:
       postgres:
         image: postgres:14.1
         env:
-          POSTGRES_PASSWORD: postgres
-        ports: ['5432:5432']
+          POSTGRES_PASSWORD: 6394
+          POSTGRES_USER: shket
+          POSTGRES_DB: online_shop_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -51,10 +52,8 @@ jobs:
 
       - name: Setup database
         env:
-          PG_DATABASE: online_shop_test
           PG_HOST: localhost
           PG_USER: shket
-          PG_PASSWORD: 6394
           RAILS_ENV: test
         run: bundle exec rails db:setup
 
