@@ -1,0 +1,62 @@
+name: Ruby
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services: 
+      postgres:
+        image: postgres:14.1
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 21.2
+          cache: yarn
+
+      - name: Install packages
+        run: |
+          yarn install --pure-lockfile
+
+      - name: Install Dependencies
+        run: |
+          sudo apt install -yqq libpq-dev
+          gem install bundler
+
+      - name: Install Gems
+        run: |
+          bundle install
+
+      - name: Setup database
+        env:
+          PG_DATABASE: online_shop_test
+          PG_HOST: localhost
+          PG_USER: shket
+          PG_PASSWORD: 6394
+          RAILS_ENV: test
+        run: bundle exec rails db:setup
+
+      - name: Run tests
+        run: bundle exec rspec spec
