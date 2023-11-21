@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 ruby '3.0.0'
 
 gem 'bootsnap', require: false
+gem 'importmap-rails', '~> 1.2'
 gem 'jbuilder'
 gem 'pg', '~> 1.1'
 gem 'pry'
@@ -13,7 +14,9 @@ gem 'rails', '~> 7.1.2'
 gem 'rubocop'
 gem 'rubocop-rails'
 gem 'rubocop-rspec'
+gem 'slim-rails'
 gem 'sprockets-rails'
+gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mswin mswin64 mingw x64_mingw jruby]
 
 group :development, :test do

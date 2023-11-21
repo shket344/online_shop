@@ -1,5 +1,9 @@
 AllCops:
   NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - db/**/*
+    - vendor/**/*
 
 Metrics/BlockLength:
   Enabled: false

@@ -1,0 +1,90 @@
+name: Online Shop CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+
+    services: 
+      postgres:
+        image: postgres:14.1
+        env:
+          POSTGRES_PASSWORD: 6394
+          POSTGRES_USER: shket
+          POSTGRES_DB: online_shop_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 21.2
+          cache: yarn
+
+      - name: Install Dependencies
+        run: |
+          sudo apt install -yqq libpq-dev
+          gem install bundler
+          bundle install
+          yarn install --pure-lockfile
+
+      - name: Setup database
+        env:
+          PGHOST: localhost
+          PGUSER: shket
+          RAILS_ENV: test
+        run: bundle exec rails db:setup
+
+      - name: Run tests
+        env:
+          PGHOST: localhost
+          POSTGRES_DB: online_shop_test
+          POSTGRES_USER: shket
+          POSTGRES_PASSWORD: 6394
+          PGPORT: ${{ job.services.postgres.ports[5432] }}
+          RAILS_ENV: test
+        run: bundle exec rspec spec
+
+  rubocop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 21.2
+          cache: yarn
+
+      - name: Install Dependencies
+        run: |
+          sudo apt install -yqq libpq-dev
+          gem install bundler
+          bundle install
+          yarn install --pure-lockfile
+
+      - name: 
+        run: bundle exec rubocop
