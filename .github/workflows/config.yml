@@ -37,23 +37,17 @@ jobs:
           node-version: 21.2
           cache: yarn
 
-      - name: Install packages
-        run: |
-          yarn install --pure-lockfile
-
       - name: Install Dependencies
         run: |
           sudo apt install -yqq libpq-dev
           gem install bundler
-
-      - name: Install Gems
-        run: |
           bundle install
+          yarn install --pure-lockfile
 
       - name: Setup database
         env:
-          PG_HOST: localhost
-          PG_USER: shket
+          PGHOST: localhost
+          PGUSER: shket
           RAILS_ENV: test
         run: bundle exec rails db:setup
 
