@@ -79,10 +79,12 @@ jobs:
           node-version: 21.2
           cache: yarn
 
-      - name: Run Rubocop
+      - name: Install Dependencies
         run: |
           sudo apt install -yqq libpq-dev
           gem install bundler
           bundle install
           yarn install --pure-lockfile
-          bundle exec rubocop
+
+      - name: 
+        run: bundle exec rubocop
