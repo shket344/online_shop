@@ -7,6 +7,7 @@ ruby '3.0.0'
 gem 'bootsnap', require: false
 gem 'importmap-rails', '~> 1.2'
 gem 'jbuilder'
+gem 'panolint'
 gem 'panolint-rails'
 gem 'panolint-ruby'
 gem 'pg', '~> 1.1'
