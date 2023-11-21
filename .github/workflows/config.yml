@@ -1,4 +1,4 @@
-name: Ruby
+name: CI
 
 on:
   push:
@@ -53,4 +53,11 @@ jobs:
         run: bundle exec rails db:setup
 
       - name: Run tests
+        env:
+          PGHOST: localhost
+          POSTGRES_DB: online_shop_test
+          POSTGRES_USER: shket
+          POSTGRES_PASSWORD: 6394
+          PGPORT: ${{ job.services.postgres.ports[5432] }}
+          RAILS_ENV: test
         run: bundle exec rspec spec
