@@ -11,10 +11,12 @@
 #  title       :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  category_id :bigint           not null
 #
 # Indexes
 #
-#  index_products_on_title  (title) UNIQUE
+#  index_products_on_category_id  (category_id)
+#  index_products_on_title        (title) UNIQUE
 #
 
 require 'rails_helper'
