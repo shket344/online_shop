@@ -1,0 +1,7 @@
+= form_with(model: [category], local: true, html: { multipart: true }) do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title
+  br
+  .form-group
+    = f.submit 'Submit'

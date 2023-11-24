@@ -1,0 +1,10 @@
+h1 All Categories
+
+table
+  - @categories.each do |category|
+    tr
+      td
+        = link_to "#{category.title}", category_products_path(category)
+
+br
+= link_to 'Create Category', new_category_path
