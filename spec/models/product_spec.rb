@@ -11,10 +11,12 @@
 #  title       :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  category_id :bigint           not null
 #
 # Indexes
 #
-#  index_products_on_title  (title) UNIQUE
+#  index_products_on_category_id  (category_id)
+#  index_products_on_title        (title) UNIQUE
 #
 
 require 'rails_helper'
@@ -26,6 +28,10 @@ RSpec.describe Product, type: :model do
     end
 
     context 'with invalid attributes' do
+      context 'with missing category' do
+        include_examples 'not_create_object_for', :product, category_id: nil
+      end
+
       context 'with invalid title' do
         context 'when missing title' do
           include_examples 'not_create_object_for', :product, title: nil

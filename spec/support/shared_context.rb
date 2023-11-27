@@ -6,7 +6,7 @@ RSpec.shared_examples 'creates_object_for' do |model_name|
   let(:attributes) { FactoryBot.attributes_for(model_name) }
 
   it 'creates object' do
-    expect { subject.save }.to change { described_class.count }.by(1)
+    expect { subject.save! }.to change { described_class.count }.by(1)
   end
 end
 
