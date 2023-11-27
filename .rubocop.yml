@@ -3,6 +3,7 @@ AllCops:
   SuggestExtensions: false
   Exclude:
     - db/**/*
+    - config/**/*
     - vendor/**/*
 
 Metrics/BlockLength:

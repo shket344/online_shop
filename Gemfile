@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 ruby '3.0.0'
 
 gem 'bootsnap', require: false
+gem 'devise'
 gem 'importmap-rails', '~> 1.2'
 gem 'jbuilder'
 gem 'pg', '~> 1.1'
