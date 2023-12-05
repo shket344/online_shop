@@ -1,0 +1,4 @@
+- if user_signed_in?
+  = link_to 'My Profile', user_path(current_user.id)
+- else
+  = link_to 'Sign In', user_session_path
