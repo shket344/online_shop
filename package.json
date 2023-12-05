@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "jquery": "^3.7.1",
     "yarn": "^1.22.21"
   }
 }
