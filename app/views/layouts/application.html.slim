@@ -11,5 +11,9 @@ html
     = javascript_importmap_tags
   body
     = render 'layouts/header'
-    = yield
+    .body
+      = render 'layouts/sidebar'
+      .main
+        = yield
+    = render 'layouts/footer'
     

@@ -1,4 +1,17 @@
-- if user_signed_in?
-  = link_to 'My Profile', user_path(current_user.id)
-- else
-  = link_to 'Sign In', user_session_path
+= stylesheet_link_tag 'header'
+
+.header
+  .container
+    .row
+      .col-md-1
+        .logo
+          h1 Online Shop
+      - if user_signed_in?
+        .col-md-10
+        .col-md-1
+          = link_to 'My Profile', user_path(current_user.id), class: 'btn btn-outline-info btn-sm'
+      - else
+        .col-md-10
+        .col-md-1
+          = link_to 'Sign In', user_session_path, class: 'btn btn-success btn-sm'
+

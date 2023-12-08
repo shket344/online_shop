@@ -15,4 +15,15 @@
  */
 
  @import 'bootstrap';
+
+ .body {
+  background-color: darkcyan;
+  min-height: 100vh;
+
+  .main {
+    padding-left: 100px;
+  }
+ }
+
+ 
  

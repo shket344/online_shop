@@ -7,11 +7,11 @@ table
   - @products.each do |product|
     tr
       td
-        = link_to "#{product.title}", category_product_path(@category, product)
+        = link_to "#{product.title}", category_product_path(@category, product), class: 'link-info'
 
 br
-= link_to 'Create Product', new_category_product_path(@category)
+= link_to 'Create Product', new_category_product_path(@category), class: 'btn btn-sm btn-outline-secondary'
 br
-= link_to 'Back', :back
+= link_to 'Back', :back, class: 'btn btn-sm btn-outline-primary'
 br
-= link_to 'Home', root_path
+= link_to 'Home', root_path, class: 'btn btn-sm btn-outline-info'
