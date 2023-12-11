@@ -3,7 +3,12 @@ AllCops:
   SuggestExtensions: false
   Exclude:
     - db/**/*
+    - config/**/*
     - vendor/**/*
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/support/shared_context.rb
 
 Metrics/BlockLength:
   Enabled: false

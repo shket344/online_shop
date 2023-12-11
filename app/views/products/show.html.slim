@@ -11,12 +11,12 @@ p
   strong Product Description: 
   = @product.description
 
-= link_to 'Back', :back
+= link_to 'Back', :back, class: 'btn btn-sm btn-outline-primary'
 br
-= link_to 'Category', category_products_path(@category)
+= link_to 'Category', category_products_path(@category), class: 'btn btn-sm btn-outline-primary'
 br
-= link_to 'Edit', edit_category_product_path(@category, @product)
+= link_to 'Edit', edit_category_product_path(@category, @product), class: 'btn btn-sm btn-outline-secondary'
 br
-= link_to 'Delete Product', category_product_path(@category, @product), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
+= link_to 'Delete Product', category_product_path(@category, @product), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger'
 br
-= link_to 'Home', root_path
+= link_to 'Home', root_path, class: 'btn btn-sm btn-outline-info'
