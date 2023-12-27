@@ -14,7 +14,13 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :categories, only: %i[index new create edit update destroy] do
-    resources :products
+  resources :users, only: %i[show destroy] do
+    resources :categories do
+      resources :products
+    end
+  end
+
+  resources :categories, only: %i[index] do
+    resources :products, only: %i[index show]
   end
 end

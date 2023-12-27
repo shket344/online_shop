@@ -61,4 +61,12 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#full_name' do
+    let(:user) { create(:user, name: 'Name', surname: 'Surname') }
+
+    it 'returns full name of the user' do
+      expect(user.full_name).to eq 'Name Surname'
+    end
+  end
 end
