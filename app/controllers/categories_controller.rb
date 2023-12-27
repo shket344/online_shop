@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class CategoriesController < ApplicationController
+  load_and_authorize_resource
+
   before_action :find_category, only: %i[edit update destroy]
 
   def index
-    @categories = Category.all
+    @categories = Category.order(:title)
   end
 
   def new
@@ -14,10 +16,11 @@ class CategoriesController < ApplicationController
   def edit; end
 
   def create
-    @category = Category.create(category_params)
+    user = User.find_by(id: params[:user_id])
+    @category = Category.create(category_params.merge(user_id: user.id))
 
     if @category.save
-      redirect_to category_products_path(@category)
+      redirect_to user_category_products_path(user, @category)
     else
       render :new
     end
@@ -44,6 +47,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:title)
+    params.require(:category).permit(:user_id, :title)
   end
 end

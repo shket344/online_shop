@@ -8,6 +8,11 @@
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :bigint
+#
+# Indexes
+#
+#  index_categories_on_user_id  (user_id)
 #
 
 require 'rails_helper'
@@ -28,6 +33,12 @@ RSpec.describe Category, type: :model do
           before { create(:category, title: 'test') }
 
           include_examples 'not_create_object_for', :category, title: 'test'
+        end
+      end
+
+      context 'with invalid user' do
+        context 'when no user' do
+          include_examples 'not_create_object_for', :category, user: nil
         end
       end
     end

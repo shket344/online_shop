@@ -50,7 +50,7 @@ jobs:
           PGHOST: localhost
           PGUSER: shket
           RAILS_ENV: test
-        run: bundle exec rails db:setup
+        run: bundle exec rails db:test:prepare
 
       - name: Run tests
         env:

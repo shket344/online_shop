@@ -3,7 +3,7 @@
 RSpec.shared_examples 'creates_object_for' do |model_name|
   subject { described_class.new(attributes) }
 
-  let(:attributes) { FactoryBot.attributes_for(model_name) }
+  let(:attributes) { attributes_for(model_name) }
 
   it 'creates object' do
     expect(subject.valid?).to be_truthy
@@ -14,7 +14,7 @@ end
 RSpec.shared_examples 'not_create_object_for' do |model_name, parameter|
   subject { described_class.new(attributes) }
 
-  let(:attributes) { FactoryBot.attributes_for(model_name, parameter) }
+  let(:attributes) { attributes_for(model_name, parameter) }
 
   it 'should not be valid' do
     expect(subject.valid?).to be_falsy

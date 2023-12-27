@@ -4,7 +4,11 @@ table
   - @categories.each do |category|
     tr
       td
-        = link_to "#{category.title}", category_products_path(category), class: 'link-info'
+        -if can? :read, Product
+          = link_to "#{category.title}", category_products_path(category), class: 'link-info'
+        -else
+          = link_to "#{category.title}", users_sign_in_path, class: 'link-info'
 
 br
-= link_to 'Create Category', new_category_path, class: 'btn btn-sm btn-outline-secondary'
+-if can? :manage, Category
+  = link_to 'Create Category', new_user_category_path(current_user), class: 'btn btn-sm btn-outline-secondary'

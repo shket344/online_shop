@@ -14,11 +14,13 @@
 #  surname                :string           default(""), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  role_id                :bigint
 #
 # Indexes
 #
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_role_id               (role_id)
 #
 
 require 'rails_helper'
@@ -53,6 +55,18 @@ RSpec.describe User, type: :model do
       context 'when email invalid' do
         include_examples 'not_create_object_for', :user, email: 'test'
       end
+
+      context 'when role empty' do
+        include_examples 'not_create_object_for', :user, role: nil
+      end
+    end
+  end
+
+  describe '#full_name' do
+    let(:user) { create(:user, name: 'Name', surname: 'Surname') }
+
+    it 'returns full name of the user' do
+      expect(user.full_name).to eq 'Name Surname'
     end
   end
 end

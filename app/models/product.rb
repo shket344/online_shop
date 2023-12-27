@@ -12,15 +12,18 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  category_id :bigint           not null
+#  user_id     :bigint
 #
 # Indexes
 #
 #  index_products_on_category_id  (category_id)
 #  index_products_on_title        (title) UNIQUE
+#  index_products_on_user_id      (user_id)
 #
 
 class Product < ApplicationRecord
   belongs_to :category
+  belongs_to :user
 
   validates :title, :price, presence: true
   validates :title, uniqueness: true

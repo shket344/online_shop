@@ -6,6 +6,7 @@ ruby '3.0.0'
 
 gem 'bootsnap', require: false
 gem 'bootstrap'
+gem 'cancancan'
 gem 'devise'
 gem 'importmap-rails', '~> 1.2'
 gem 'jbuilder'
