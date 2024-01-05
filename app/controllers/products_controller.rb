@@ -3,7 +3,7 @@
 class ProductsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :find_product, only: %i[show edit update destroy]
+  before_action :find_product, only: %i[show edit update]
   before_action :find_category
 
   def index
@@ -12,22 +12,7 @@ class ProductsController < ApplicationController
 
   def show; end
 
-  def new
-    @product = Product.new
-  end
-
   def edit; end
-
-  def create
-    user = User.find_by(id: params[:user_id])
-    @product = Product.create(product_params.merge(category_id: @category.id, user_id: user.id))
-
-    if @product.save
-      redirect_to category_product_path(@product.category, @product)
-    else
-      render :new
-    end
-  end
 
   def update
     if @product.update(product_params)
@@ -35,12 +20,6 @@ class ProductsController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def destroy
-    @product.destroy
-
-    redirect_to root_path, status: :see_other
   end
 
   private
@@ -54,6 +33,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:user_id, :title, :description, :price, :image_url, :category_id)
+    params.require(:product).permit(:title, :description, :price, :image_url, :category_id)
   end
 end

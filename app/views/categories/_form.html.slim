@@ -1,7 +1,0 @@
-= form_with(model: [:user, category], local: true, html: { multipart: true }) do |f|
-  .form-group
-    = f.label :title
-    = f.text_field :title
-  br
-  .form-group
-    = f.submit 'Submit', class: 'btn btn-sm btn-outline-success'
