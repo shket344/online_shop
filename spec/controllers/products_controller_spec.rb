@@ -24,34 +24,6 @@ RSpec.describe ProductsController, type: :controller do
     end
   end
 
-  describe '#new' do
-    it 'assigns a new product as @product' do
-      get :new, params: { user_id: user.id, category_id: category.id }, format: :html
-      expect(assigns(:product)).to be_a_new(Product)
-    end
-  end
-
-  describe '#create' do
-    let(:product_params) { attributes_for(:product) }
-
-    context 'with valid attributes' do
-      it 'creates new product' do
-        post :create, params: { product: product_params, category_id: category.id, user_id: user.id }
-
-        product = Product.find_by(title: product_params[:title])
-        expect(response).to redirect_to category_product_path(category, product)
-      end
-    end
-
-    context 'with invalid attributes' do
-      it 'does not create new product' do
-        post :create, params: { product: product_params.except(:title), category_id: category.id, user_id: user.id }
-
-        expect(response).to render_template('new')
-      end
-    end
-  end
-
   describe '#edit' do
     it 'assigns the requested product as @product' do
       get :edit, params: { id: product.id, category_id: category.id, user_id: product.user_id }
@@ -76,14 +48,6 @@ RSpec.describe ProductsController, type: :controller do
 
         expect(response).to render_template('edit')
       end
-    end
-  end
-
-  describe '#destroy' do
-    it 'destroys product' do
-      delete :destroy, params: { id: product.id, category_id: category.id, user_id: product.user_id }
-
-      expect(response).to have_http_status(:see_other)
     end
   end
 end

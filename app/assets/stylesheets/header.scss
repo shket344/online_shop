@@ -11,6 +11,17 @@
   }
 }
 
+.header_buttons {
+  position: absolute;
+  top: 30%;
+  left: 80%;
+}
+
+.btn {
+  margin-left: 0.15rem;
+  margin-right: 0.15rem;
+}
+
 .logo {
   background-color: rgba(131, 2, 145, 0.538);
   border-radius: 20px 20px;

@@ -19,5 +19,3 @@ br
 br
 -if can? :manage, Product
   = link_to 'Edit', edit_user_category_product_path(@category, @product), class: 'btn btn-sm btn-outline-secondary'
-  br
-  = link_to 'Delete Product', user_category_product_path(@category, @product), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger'

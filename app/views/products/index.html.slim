@@ -1,3 +1,5 @@
+h4 = @category.title
+br
 h1 Products
 
 - if @products.blank?
@@ -18,16 +20,7 @@ table
         p
           = mail_to product.user.email, 'Contact me'
 
-
--if can? :manage, Product
-  br
-  = link_to 'Create Product', new_user_category_product_path(current_user, @category), class: 'btn btn-sm btn-outline-secondary'
-  br
-  = link_to 'Back', :back, class: 'btn btn-sm btn-outline-primary'
-  br
-  = link_to 'Home', root_path, class: 'btn btn-sm btn-outline-info'
--else
-  br
-  = link_to 'Back', :back, class: 'btn btn-sm btn-outline-primary'
-  br
-  = link_to 'Home', root_path, class: 'btn btn-sm btn-outline-info'
+br
+= link_to 'Back', :back, class: 'btn btn-sm btn-outline-primary'
+br
+= link_to 'Home', root_path, class: 'btn btn-sm btn-outline-info'

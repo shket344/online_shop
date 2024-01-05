@@ -2,16 +2,17 @@
 
 .header
   .container
-    .row
+    .row.align-items-start
       .col-md-1
-        .logo
-          h1 Online Shop
-      - if user_signed_in?
-        .col-md-10
-        .col-md-1
-          = link_to 'My Profile', user_path(current_user.id), class: 'btn btn-outline-info btn-sm'
-          = link_to 'Home', root_path, class: 'btn btn-outline-success btn-sm'
-      - else
-        .col-md-10
-        .col-md-1
-          = link_to 'Sign In', user_session_path, class: 'btn btn-success btn-sm'
+        a[href="\" style="text-decoration: none;"]
+          .logo
+            h1 Online Shop
+        - if user_signed_in?
+          .header_buttons
+            = link_to 'My Profile', user_path(current_user.id), class: 'btn btn-info btn-sm p-1'
+            = link_to 'Home', root_path, class: 'btn btn-success btn-sm p-1'
+            - if current_user.role.title == 'owner'
+              = link_to 'Dashboard', admin_dashboard_path, class: 'btn btn-sm btn-primary p-1'
+        - else
+          .header_buttons
+            = link_to 'Sign In', user_session_path, class: 'btn btn-success btn-sm p-1'
