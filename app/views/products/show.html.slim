@@ -11,6 +11,10 @@ p
   strong Product Description: 
   = @product.description
 
+p
+  strong Available Quantity: 
+  = @product.quantity
+
 = link_to 'Back', :back, class: 'btn btn-sm btn-outline-primary'
 br
 = link_to 'Category', category_products_path(@category), class: 'btn btn-sm btn-outline-primary'
