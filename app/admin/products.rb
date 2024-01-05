@@ -3,5 +3,5 @@
 ActiveAdmin.register Product do
   includes :user, :category
 
-  permit_params :title, :description, :image_url, :price, :category_id, :user_id
+  permit_params :title, :description, :image_url, :price, :quantity, :category_id, :user_id
 end
