@@ -8,6 +8,7 @@
 #  description :text
 #  image_url   :string
 #  price       :decimal(8, 2)    not null
+#  quantity    :integer          default(0)
 #  title       :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -57,6 +58,12 @@ RSpec.describe Product, type: :model do
 
         context 'when price belong 0.01' do
           include_examples 'not_create_object_for', :product, price: 0.001
+        end
+      end
+
+      context 'with invalid quantity' do
+        context 'when quantity belong 0' do
+          include_examples 'not_create_object_for', :product, quantity: -5
         end
       end
     end
