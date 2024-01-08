@@ -9,11 +9,13 @@
 #  status     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  cart_id    :bigint
 #  product_id :bigint           not null
 #  user_id    :bigint           not null
 #
 # Indexes
 #
+#  index_orders_on_cart_id     (cart_id)
 #  index_orders_on_product_id  (product_id)
 #  index_orders_on_user_id     (user_id)
 #
@@ -37,6 +39,12 @@ RSpec.describe Order, type: :model do
         end
       end
 
+      context 'with invalid cart' do
+        context 'when no cart' do
+          include_examples 'not_create_object_for', :order, cart: nil
+        end
+      end
+
       context 'with invalid product' do
         context 'when no product' do
           include_examples 'not_create_object_for', :order, product: nil
@@ -52,7 +60,7 @@ RSpec.describe Order, type: :model do
   end
 
   describe 'state transitions' do
-    let(:order) { Order.new }
+    let(:order) { create(:order) }
 
     context 'when order create' do
       it 'move from created to processing' do

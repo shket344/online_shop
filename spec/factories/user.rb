@@ -7,5 +7,11 @@ FactoryBot.define do
     surname { 'Jones' }
     email { Faker::Internet.email }
     password { '162534' }
+
+    trait :with_cart do
+      after(:create) do |user|
+        FactoryBot.create(:cart, user: user)
+      end
+    end
   end
 end
