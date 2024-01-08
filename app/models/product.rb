@@ -32,4 +32,6 @@ class Product < ApplicationRecord
   validates :title, uniqueness: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
   validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
+  default_scope { order(:title) }
 end
