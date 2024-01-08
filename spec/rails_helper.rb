@@ -7,6 +7,7 @@ require_relative './support/factory_bot'
 require_relative './support/shared_context'
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
+require 'aasm/rspec'
 
 begin
   ActiveRecord::Migration.maintain_test_schema!

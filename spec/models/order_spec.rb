@@ -51,6 +51,28 @@ RSpec.describe Order, type: :model do
     end
   end
 
+  describe 'state transitions' do
+    let(:order) { Order.new }
+
+    context 'when order create' do
+      it 'move from created to processing' do
+        expect(order).to transition_from(:created).to(:processing).on_event(:book)
+      end
+    end
+
+    context 'when order approved' do
+      it 'move from processing to approved' do
+        expect(order).to transition_from(:processing).to(:approved).on_event(:approve)
+      end
+    end
+
+    context 'when order declined' do
+      it 'move from processing to declined' do
+        expect(order).to transition_from(:processing).to(:declined).on_event(:decline)
+      end
+    end
+  end
+
   describe '#total' do
     let(:product) { create(:product, price: 0.1) }
     let(:order) { create(:order, quantity: 5, product: product) }
