@@ -27,6 +27,7 @@ class User < ApplicationRecord
   belongs_to :role
   has_many :products
   has_many :categories
+  has_many :carts
   has_many :orders
 
   validates_presence_of :name, :surname, :email, :role

@@ -2,38 +2,29 @@
 
 # == Schema Information
 #
-# Table name: orders
+# Table name: carts
 #
 #  id         :bigint           not null, primary key
-#  quantity   :integer          default(0)
-#  status     :string
+#  state      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  cart_id    :bigint
-#  product_id :bigint           not null
 #  user_id    :bigint           not null
 #
 # Indexes
 #
-#  index_orders_on_cart_id     (cart_id)
-#  index_orders_on_product_id  (product_id)
-#  index_orders_on_user_id     (user_id)
+#  index_carts_on_user_id  (user_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (product_id => products.id)
 #  fk_rails_...  (user_id => users.id)
 #
-class Order < ApplicationRecord
+class Cart < ApplicationRecord
   include AASM
 
-  belongs_to :product
+  has_many :orders
   belongs_to :user
-  belongs_to :cart
 
-  validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-
-  aasm column: :status do
+  aasm column: :state do
     state :created, initial: true
     state :processing, :approved, :declined
 
@@ -48,9 +39,5 @@ class Order < ApplicationRecord
     event :decline do
       transitions from: :processing, to: :declined
     end
-  end
-
-  def total
-    product.price * quantity
   end
 end
