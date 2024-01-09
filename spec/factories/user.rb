@@ -25,5 +25,12 @@ FactoryBot.define do
     trait :simple_user do
       role { FactoryBot.create(:role, title: 'user') }
     end
+
+    trait :with_related_data do
+      after(:create) do |user|
+        category = FactoryBot.create(:category, user: user)
+        5.times { FactoryBot.create(:product, category: category, user: user) }
+      end
+    end
   end
 end

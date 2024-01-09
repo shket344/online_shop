@@ -47,22 +47,22 @@ class Cart < ApplicationRecord
 
   def make_order
     ActiveRecord::Base.transaction do
-      book!
       orders.each(&:book!)
+      book!
     end
   end
 
   def approve_order
     ActiveRecord::Base.transaction do
-      approve!
       orders.each(&:approve!)
+      approve!
     end
   end
 
   def decline_order
     ActiveRecord::Base.transaction do
-      decline!
       orders.each(&:decline!)
+      decline!
     end
   end
 end
