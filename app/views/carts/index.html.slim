@@ -18,6 +18,9 @@ table
       - if cart.declined?
         td
           = link_to 'Retry Order', user_retry_order_path(current_user, cart), class: 'btn btn-sm btn-warning'
+      - if cart.approved?
+        td
+          = link_to 'Repeat Order', user_repeat_order_path(current_user, cart), class: 'btn btn-sm btn-info'    
     tr
       - cart.orders.each.with_index(1) do |order, ind|
         td
@@ -42,4 +45,6 @@ table
               = order.convert_date(order.created_at)
             td
               br
-
+    tr
+      td
+        .empty_block

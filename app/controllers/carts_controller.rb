@@ -22,4 +22,11 @@ class CartsController < ApplicationController
     RetryOrderService.call(cart)
     redirect_to user_carts_path(current_user)
   end
+
+  def repeat_order
+    cart = Cart.find_by(id: params[:id])
+    cart.repeat_order
+    RepeatOrderService.call(cart)
+    redirect_to user_carts_path(current_user)
+  end
 end

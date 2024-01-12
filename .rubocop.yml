@@ -13,6 +13,9 @@ Lint/AmbiguousBlockAssociation:
 Lint/MissingSuper:
   Enabled: false
 
+Metrics/AbcSize:
+  Max: 20
+
 Metrics/BlockLength:
   Enabled: false
 
