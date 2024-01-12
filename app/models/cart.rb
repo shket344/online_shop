@@ -20,6 +20,7 @@
 #
 class Cart < ApplicationRecord
   include AASM
+  include DateParser
 
   has_many :orders
   belongs_to :user

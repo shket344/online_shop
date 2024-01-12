@@ -26,6 +26,7 @@
 #
 class Order < ApplicationRecord
   include AASM
+  include DateParser
 
   belongs_to :product
   belongs_to :user
