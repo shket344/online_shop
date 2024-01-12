@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class CartsController < ApplicationController
+  def index
+    @carts = Cart.where(user: current_user).preload(:orders).includes(orders: [product: :category]).order(:created_at)
+  end
+
   def show
     @orders = @cart.orders.includes(product: :category)
   end

@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       resources :products
     end
 
-    resources :carts, only: %i[show]
+    resources :carts, only: %i[index show]
     get '/carts/:id/make_order', to: 'carts#make_order', as: 'make_order'
     post '/orders/add', to: 'orders#add'
     post '/orders/update_order', to: 'orders#update_order'
