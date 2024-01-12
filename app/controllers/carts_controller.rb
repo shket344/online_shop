@@ -15,4 +15,11 @@ class CartsController < ApplicationController
     session[:cart_id] = nil
     redirect_to :root
   end
+
+  def retry_order
+    cart = Cart.find_by(id: params[:id])
+    cart.retry_order
+    RetryOrderService.call(cart)
+    redirect_to user_carts_path(current_user)
+  end
 end

@@ -10,8 +10,14 @@ table
         strong Status: 
         = cart.state
       td
+        strong Total Price: 
+        = cart.total_price
+      td
         strong Status Updated: 
         = cart.convert_date(cart.updated_at)
+      - if cart.declined?
+        td
+          = link_to 'Retry Order', user_retry_order_path(current_user, cart), class: 'btn btn-sm btn-warning'
     tr
       - cart.orders.each.with_index(1) do |order, ind|
         td
@@ -20,7 +26,7 @@ table
             td
               strong #{ind}:
             td
-              strong Product:
+              strong Product: 
               = link_to "#{product.title}", category_product_path(product.category, product)
             td
               strong Quantity: 

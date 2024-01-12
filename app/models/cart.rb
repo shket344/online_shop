@@ -77,14 +77,14 @@ class Cart < ApplicationRecord
 
   def retry_order
     ActiveRecord::Base.transaction do
-      orders.each(:retry!)
+      orders.each(&:retry!)
       retry!
     end
   end
 
   def repeat_order
     ActiveRecord::Base.transaction do
-      orders.each(:reorder!)
+      orders.each(&:reorder!)
       reorder!
     end
   end
