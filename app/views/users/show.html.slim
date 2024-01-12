@@ -8,6 +8,15 @@ p
   strong Email: 
   = @user.email
 
+p
+  strong Current Balance: #{@user.fund}
+
+= form_with(url: user_add_funds_path(@user)) do |f|
+  .form-group
+    = f.label :sum
+    = f.number_field :fund, value: 0.0, min: 0.01, style: 'width:70px', step: :any
+    = f.submit 'Add Funds', class: 'btn btn-sm btn-outline-success'
+br
 = link_to 'Edit', edit_user_path, class: 'btn btn-sm btn-secondary'
 '
 = link_to 'Log Out', destroy_user_session_path, data: { turbo_method: :delete }, class: 'btn btn-sm btn-warning'
