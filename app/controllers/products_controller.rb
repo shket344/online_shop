@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
   load_and_authorize_resource
 
   before_action :find_product, only: %i[show edit update]
+  before_action :set_order, only: %i[show]
   before_action :find_category
 
   def index
@@ -30,6 +31,10 @@ class ProductsController < ApplicationController
 
   def find_product
     @product = Product.find_by(id: params[:id])
+  end
+
+  def set_order
+    @order = @cart.orders.find_by(product_id: @product.id)
   end
 
   def product_params
