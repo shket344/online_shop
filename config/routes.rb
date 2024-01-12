@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root to: 'categories#index'
 
@@ -32,4 +34,6 @@ Rails.application.routes.draw do
   resources :categories, only: %i[index] do
     resources :products, only: %i[index show]
   end
+
+  mount Sidekiq::Web => '/sidekiq'
 end
