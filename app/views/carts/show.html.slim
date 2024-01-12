@@ -1,0 +1,40 @@
+h1 Current Order
+
+- if @orders.blank?
+  strong No products. Add something :)
+
+- else
+  p
+    strong Total Price: 
+    = @cart.total_price
+
+  p
+    = link_to 'Make Order', user_make_order_path(current_user, @cart), class: 'btn btn-sm btn-warning'
+
+  table
+    - @orders.each do |order|
+      tr
+        td
+          strong Product: 
+          = order.product.title
+        td
+          strong Quantity: 
+          = order.quantity
+        td
+          strong Product Price: 
+          = order.product.price
+        td
+          strong Total Price For Products: 
+          = order.total
+        td
+          - max_quantity = order.product.quantity.zero? ? order.quantity : order.product.quantity
+          = form_with(url: user_orders_update_order_path(current_user)) do |f|
+            .form-group
+              = f.hidden_field :id, value: order.id
+            .form-group
+              = f.hidden_field :product_id, value: order.product_id
+              = f.label :quantity 
+              = f.number_field :quantity, value: order.quantity, min: 1, max: max_quantity, style: 'width:70px'
+              = f.submit 'Update Order', class: 'btn btn-sm btn-outline-success'
+        td
+          = link_to 'X', user_orders_remove_order_path(current_user), params: { id: order.id }, class: 'btn btn-sm btn-danger'

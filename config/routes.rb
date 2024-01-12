@@ -20,6 +20,12 @@ Rails.application.routes.draw do
     resources :categories do
       resources :products
     end
+
+    resources :carts, only: %i[show]
+    get '/carts/:id/make_order', to: 'carts#make_order', as: 'make_order'
+    post '/orders/add', to: 'orders#add'
+    post '/orders/update_order', to: 'orders#update_order'
+    post '/orders/remove_order', to: 'orders#remove_order'
   end
 
   resources :categories, only: %i[index] do
