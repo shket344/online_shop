@@ -49,6 +49,14 @@ class Order < ApplicationRecord
     event :decline do
       transitions from: :processing, to: :declined
     end
+
+    event :retry do
+      transitions from: :declined, to: :processing
+    end
+
+    event :reorder do
+      transitions from: :approved, to: :processing
+    end
   end
 
   def total

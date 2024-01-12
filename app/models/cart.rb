@@ -40,6 +40,14 @@ class Cart < ApplicationRecord
     event :decline do
       transitions from: :processing, to: :declined
     end
+
+    event :retry do
+      transitions from: :declined, to: :processing
+    end
+
+    event :reorder do
+      transitions from: :approved, to: :processing
+    end
   end
 
   def total_price
@@ -64,6 +72,20 @@ class Cart < ApplicationRecord
     ActiveRecord::Base.transaction do
       orders.each(&:decline!)
       decline!
+    end
+  end
+
+  def retry_order
+    ActiveRecord::Base.transaction do
+      orders.each(:retry!)
+      retry!
+    end
+  end
+
+  def repeat_order
+    ActiveRecord::Base.transaction do
+      orders.each(:reorder!)
+      reorder!
     end
   end
 end
