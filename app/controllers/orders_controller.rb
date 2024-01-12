@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
 
   def update_order
     UpdateOrderService.call(@order, order_params, 'update')
+    redirect_to user_cart_path(current_user, @cart)
   end
 
   def add
@@ -13,10 +14,13 @@ class OrdersController < ApplicationController
     else
       @order = CreateOrderService.call(order_params.merge(cart_id: @cart.id, user_id: current_user.id))
     end
+
+    redirect_to user_cart_path(current_user, @cart)
   end
 
   def remove_order
     UpdateOrderService.call(@order, order_params, 'destroy')
+    redirect_to user_cart_path(current_user, @cart)
   end
 
   private

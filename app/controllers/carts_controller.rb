@@ -2,7 +2,7 @@
 
 class CartsController < ApplicationController
   def show
-    @orders = @cart.orders
+    @orders = @cart.orders.includes(product: :category)
   end
 
   def make_order

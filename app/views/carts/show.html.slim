@@ -13,28 +13,29 @@ h1 Current Order
 
   table
     - @orders.each do |order|
+      - product = order.product
       tr
         td
           strong Product: 
-          = order.product.title
+          = link_to "#{product.title}", category_product_path(product.category, product)
         td
           strong Quantity: 
           = order.quantity
         td
           strong Product Price: 
-          = order.product.price
+          = product.price
         td
           strong Total Price For Products: 
           = order.total
         td
-          - max_quantity = order.product.quantity.zero? ? order.quantity : order.product.quantity
+          - max_quantity = product.quantity.zero? ? order.quantity : product.quantity + order.quantity
           = form_with(url: user_orders_update_order_path(current_user)) do |f|
             .form-group
               = f.hidden_field :id, value: order.id
             .form-group
-              = f.hidden_field :product_id, value: order.product_id
+              = f.hidden_field :product_id, value: product.id
               = f.label :quantity 
               = f.number_field :quantity, value: order.quantity, min: 1, max: max_quantity, style: 'width:70px'
               = f.submit 'Update Order', class: 'btn btn-sm btn-outline-success'
         td
-          = link_to 'X', user_orders_remove_order_path(current_user), params: { id: order.id }, class: 'btn btn-sm btn-danger'
+          = link_to 'X', user_remove_order_path(current_user, order), class: 'btn btn-sm btn-danger'
