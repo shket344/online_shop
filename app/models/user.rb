@@ -43,6 +43,10 @@ class User < ApplicationRecord
     "#{name} #{surname}"
   end
 
+  def simple_user?
+    role.title == 'user'
+  end
+
   private
 
   def assign_role

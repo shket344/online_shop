@@ -3,6 +3,20 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :initialize_cart
+
+  private
+
+  def initialize_cart
+    return unless current_user
+
+    @cart ||= Cart.preload(:orders).includes(orders: :product).find_by(id: session[:cart_id])
+
+    return if @cart
+
+    @cart = Cart.create(user: current_user)
+    session[:cart_id] = @cart.id
+  end
 
   protected
 
