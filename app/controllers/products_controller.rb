@@ -34,6 +34,8 @@ class ProductsController < ApplicationController
   end
 
   def set_order
+    return if @cart.blank?
+
     @order = @cart.orders.find_by(product_id: @product.id)
   end
 

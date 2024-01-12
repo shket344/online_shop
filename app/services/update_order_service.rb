@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateOrderService < ApplicationService
   attr_reader :order, :params, :action
 

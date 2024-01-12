@@ -10,6 +10,9 @@ Lint/AmbiguousBlockAssociation:
   Exclude:
     - spec/support/shared_context.rb
 
+Lint/MissingSuper:
+  Enabled: false
+
 Metrics/BlockLength:
   Enabled: false
 
@@ -20,6 +23,9 @@ Metrics/MethodLength:
   Max: 20
 
 Metrics/PerceivedComplexity:
+  Enabled: false
+
+Style/ArgumentsForwarding:
   Enabled: false
 
 Style/Documentation:
