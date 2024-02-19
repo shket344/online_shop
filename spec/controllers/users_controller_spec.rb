@@ -19,6 +19,18 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe 'POST #add_funds' do
+    let(:fund) { 10 }
+    let(:new_balance) { fund + 20 }
+
+    it 'add funds to user' do
+      post :add_funds, params: { id: current_user.id, fund: fund }
+
+      expect(current_user.reload.fund).to eq new_balance
+      expect(response).to redirect_to user_path
+    end
+  end
+
   describe 'DELETE #destroy' do
     it 'delete user' do
       delete :destroy, params: { id: current_user.id }

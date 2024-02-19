@@ -70,4 +70,12 @@ RSpec.describe User, type: :model do
       expect(user.full_name).to eq 'Name Surname'
     end
   end
+
+  describe '#simple_user?' do
+    let(:user) { create(:user, :simple_user) }
+
+    it 'returns role title of the user' do
+      expect(user.simple_user?).to be_truthy
+    end
+  end
 end

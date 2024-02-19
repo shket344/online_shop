@@ -142,4 +142,56 @@ RSpec.describe Cart, type: :model do
       end
     end
   end
+
+  describe '#retry_order' do
+    subject { cart.retry_order }
+
+    let(:cart) { create(:cart, state: 'declined') }
+
+    context 'with valid data' do
+      let(:order) { create(:order, user: cart.user, cart: cart, status: 'declined') }
+
+      it 'changes status to aproved for cart and order' do
+        expect { subject }.to change { cart.state }.from('declined')
+                                                   .to('processing').and change {
+                                                                           order.reload.status
+                                                                         }.from('declined').to('processing')
+      end
+    end
+
+    context 'with invalid data' do
+      let(:order) { create(:order, user: cart.user, cart: cart, status: 'created') }
+
+      it 'does not change status for cart and order' do
+        expect { subject }.to not_change { cart.state }.and(not_change { order.reload.status })
+                          .and raise_error AASM::InvalidTransition
+      end
+    end
+  end
+
+  describe '#repeat_order' do
+    subject { cart.repeat_order }
+
+    let(:cart) { create(:cart, state: 'approved') }
+
+    context 'with valid data' do
+      let(:order) { create(:order, user: cart.user, cart: cart, status: 'approved') }
+
+      it 'changes status to aproved for cart and order' do
+        expect { subject }.to change { cart.state }.from('approved')
+                                                   .to('processing').and change {
+                                                                           order.reload.status
+                                                                         }.from('approved').to('processing')
+      end
+    end
+
+    context 'with invalid data' do
+      let(:order) { create(:order, user: cart.user, cart: cart, status: 'created') }
+
+      it 'does not change status for cart and order' do
+        expect { subject }.to not_change { cart.state }.and(not_change { order.reload.status })
+                          .and raise_error AASM::InvalidTransition
+      end
+    end
+  end
 end

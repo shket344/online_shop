@@ -6,6 +6,9 @@ AllCops:
     - config/**/*
     - vendor/**/*
 
+Layout/LineLength:
+  Max: 130
+
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - spec/support/shared_context.rb

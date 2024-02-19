@@ -32,7 +32,7 @@ class UpdateOrderService < ApplicationService
   end
 
   def destroy_order
-    update_product_quantity
+    restore_product_quantity
     order.destroy!
   end
 
@@ -43,6 +43,11 @@ class UpdateOrderService < ApplicationService
     new_quantity = quantity - order.quantity
     product_quantity = product.quantity - new_quantity
     product.update!(quantity: product_quantity)
+  end
+
+  def restore_product_quantity
+    new_quantity = product.quantity + order.quantity
+    product.update!(quantity: new_quantity)
   end
 
   def add_product_quantity
@@ -56,6 +61,6 @@ class UpdateOrderService < ApplicationService
   end
 
   def product
-    @product ||= order.product
+    @product ||= Product.find(params[:product_id])
   end
 end
