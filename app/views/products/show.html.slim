@@ -11,11 +11,27 @@ p
   strong Product Description: 
   = @product.description
 
+p
+  strong Available Quantity: 
+  = @product.quantity
+
+p
+  - if @product.quantity > 0
+    = form_with(url: user_orders_add_path(current_user)) do |f|
+      .form-group
+        = f.hidden_field :id, value: @order&.id
+      .form-group
+        = f.hidden_field :product_id, value: @product.id
+        = f.label :quantity 
+        = f.number_field :quantity, value: 0, min: 1, max: @product.quantity, style: 'width:70px'
+        = f.submit 'Add Product', class: 'btn btn-sm btn-outline-success'
+
+br
 = link_to 'Back', :back, class: 'btn btn-sm btn-outline-primary'
-br
+'
 = link_to 'Category', category_products_path(@category), class: 'btn btn-sm btn-outline-primary'
-br
+'
 = link_to 'Home', root_path, class: 'btn btn-sm btn-outline-info'
-br
--if can? :manage, Product
+'
+- if can? :manage, Product
   = link_to 'Edit', edit_user_category_product_path(@category, @product), class: 'btn btn-sm btn-outline-secondary'

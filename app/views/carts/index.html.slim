@@ -1,0 +1,50 @@
+h1 My Orders
+
+table
+  - @carts.each do |cart|
+    tr
+      td
+        strong Date: 
+        = cart.convert_date(cart.created_at)
+      td
+        strong Status: 
+        = cart.state
+      td
+        strong Total Price: 
+        = cart.total_price
+      td
+        strong Status Updated: 
+        = cart.convert_date(cart.updated_at)
+      - if cart.declined?
+        td
+          = link_to 'Retry Order', user_retry_order_path(current_user, cart), class: 'btn btn-sm btn-warning'
+      - if cart.approved?
+        td
+          = link_to 'Repeat Order', user_repeat_order_path(current_user, cart), class: 'btn btn-sm btn-info'    
+    tr
+      - cart.orders.each.with_index(1) do |order, ind|
+        td
+          - product = order.product
+          tr
+            td
+              strong #{ind}:
+            td
+              strong Product: 
+              = link_to "#{product.title}", category_product_path(product.category, product)
+            td
+              strong Quantity: 
+              = order.quantity
+            td
+              strong Product Price: 
+              = product.price
+            td
+              strong Total Price For Products: 
+              = order.total
+            td
+              strong Added to Cart: 
+              = order.convert_date(order.created_at)
+            td
+              br
+    tr
+      td
+        .empty_block

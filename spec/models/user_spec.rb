@@ -7,6 +7,7 @@
 #  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  fund                   :decimal(8, 2)    default(0.0)
 #  name                   :string           default(""), not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -67,6 +68,14 @@ RSpec.describe User, type: :model do
 
     it 'returns full name of the user' do
       expect(user.full_name).to eq 'Name Surname'
+    end
+  end
+
+  describe '#simple_user?' do
+    let(:user) { create(:user, :simple_user) }
+
+    it 'returns role title of the user' do
+      expect(user.simple_user?).to be_truthy
     end
   end
 end

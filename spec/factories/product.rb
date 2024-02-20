@@ -6,5 +6,6 @@ FactoryBot.define do
     category { FactoryBot.create(:category) }
     title { Faker::Lorem.sentences.sample }
     price { 0.01 }
+    quantity { 5 }
   end
 end

@@ -8,6 +8,7 @@
 #  description :text
 #  image_url   :string
 #  price       :decimal(8, 2)    not null
+#  quantity    :integer          default(0)
 #  title       :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -22,10 +23,15 @@
 #
 
 class Product < ApplicationRecord
+  has_many :orders, dependent: :destroy
+
   belongs_to :category
   belongs_to :user
 
   validates :title, :price, presence: true
   validates :title, uniqueness: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }
+  validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
+  default_scope { order(:title) }
 end

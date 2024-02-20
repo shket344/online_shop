@@ -12,8 +12,16 @@ h3 {
 }
 
 .footer a {
-  margin-right: -1000px;
+  margin-right: 0px;
   color: rgb(255, 255, 255);
-  padding-left: 1050px;
+  padding-left: 0px;
   text-decoration: none;
+}
+
+.cp-text{ 
+  color: rgba(0,0,0,.7); 
+  text-shadow: 0 1px rgba(255, 255, 255, 0.1);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100px;
 }

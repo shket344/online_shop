@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 ruby '3.0.0'
 
+gem 'aasm'
 gem 'activeadmin'
 gem 'bootsnap', require: false
 gem 'bootstrap'
@@ -21,6 +22,7 @@ gem 'rubocop'
 gem 'rubocop-rails'
 gem 'rubocop-rspec'
 gem 'sassc-rails'
+gem 'sidekiq'
 gem 'slim-rails'
 gem 'sprockets-rails'
 gem 'turbo-rails'

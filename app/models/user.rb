@@ -7,6 +7,7 @@
 #  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  fund                   :decimal(8, 2)    default(0.0)
 #  name                   :string           default(""), not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -25,8 +26,10 @@
 
 class User < ApplicationRecord
   belongs_to :role
-  has_many :products
-  has_many :categories
+  has_many :products, dependent: :destroy
+  has_many :categories, dependent: :destroy
+  has_many :carts, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   validates_presence_of :name, :surname, :email, :role
   before_validation :assign_role
@@ -39,6 +42,10 @@ class User < ApplicationRecord
 
   def full_name
     "#{name} #{surname}"
+  end
+
+  def simple_user?
+    role.title == 'user'
   end
 
   private
