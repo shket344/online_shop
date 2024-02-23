@@ -1,5 +1,8 @@
 h1 All Categories
 
+.custom_pagination
+  = paginate @categories
+
 table
   - @categories.each do |category|
     tr

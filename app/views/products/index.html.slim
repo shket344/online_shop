@@ -8,6 +8,9 @@ h1 Products
 - else
   h4 Products count: #{@products.size}
 
+.custom_pagination
+  = paginate @products
+
 table
   - @products.each do |product|
     tr

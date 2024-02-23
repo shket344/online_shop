@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   end
 
   resources :categories, only: %i[index] do
+    get '/page/:page', action: :index, on: :collection
     resources :products, only: %i[index show]
   end
 

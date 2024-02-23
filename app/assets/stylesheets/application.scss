@@ -16,7 +16,7 @@
 
  @import 'bootstrap';
 
- .body {
+.body {
   background-color: rgba(212, 214, 107, 0.286);
 
   .main {
@@ -25,8 +25,13 @@
     padding-top: 100px;
     min-height: 100vh;
   }
- }
 
- .empty_block {
-    height: 3rem;
- }
+  .custom_pagination {
+    display: flex;
+    margin-left: 50%;
+  }
+}
+
+.empty_block {
+  height: 3rem;
+}

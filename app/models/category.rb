@@ -16,6 +16,8 @@
 #
 
 class Category < ApplicationRecord
+  paginates_per 20
+
   has_many :products
   belongs_to :user
 
