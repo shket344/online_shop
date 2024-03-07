@@ -2,6 +2,6 @@
 
 class CategoriesController < ApplicationController
   def index
-    @categories = Category.order(:title)
+    @categories = Category.order(:title).page params[:page]
   end
 end

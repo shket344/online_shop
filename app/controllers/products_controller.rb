@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   before_action :find_category
 
   def index
-    @products = Product.includes(:user).where(category: @category)
+    @products = Product.includes(:user).where(category: @category).page params[:page]
   end
 
   def show; end

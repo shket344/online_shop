@@ -23,6 +23,8 @@
 #
 
 class Product < ApplicationRecord
+  paginates_per 10
+
   has_many :orders, dependent: :destroy
 
   belongs_to :category
